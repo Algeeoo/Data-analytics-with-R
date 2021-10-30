@@ -1,0 +1,30 @@
+
+
+library(tidyverse)
+library(openxlsx)
+library(plotly)
+library(zoo)
+
+#load data (Dummy name is Test1)
+
+1.#Change and give better column name
+names(Test1)[6]<-"Date" # Chane name of column on position [6] of Test1 dataset
+names(Test2)[7]<-"Date" # Chane name of column on position [7] of Test2 dataset
+
+2.#Convert date field to correct datatype
+str(Test1) #where test is dataset
+Test1$Date <- as.Date(Test1$Date, Origin = "1899-12-30") #must include origin else override wil not work
+  ~#plot the data to see if it is visually okay ussing 
+  ggplot(Test1, aes(x=Test1$Date, y=Test1$Quantity.sold)) + geom_point() #plot date of Test1 against Quantity.sold of Test1
+  ~#remove rows with bad data
+  Test1 <- subset(Test1, Date >= "2016-01-01") #remove all rows with date data greater than or equal to 2016-01-01
+  
+3.#remove missing values/nulls
+#identify NA's with completed cases function:
+complete.cases(Test1)
+#alternative method - use summary function. Gives exact number and colomn(s)
+summary(Test1)
+#Identify rows with NA's using na.omit for review
+Test1NAs <- subset(Test1, is.na(Test1$Customer_ID)) #this creates a subset of all the NAs in customer Id and saves them in a dateset Test1NAs
+#Replace NA's in Customer_id with 0 
+Test1[is.na(Test1)] <- 0

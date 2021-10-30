@@ -1,0 +1,28 @@
+install.packages("dplyr")
+
+library("dplyr")
+install.packages("broom")
+library(broom)
+install.packages("caTools")
+library(caTools)
+install.packages("ggplot")
+
+#correlation plot
+install.packages('corrplot')
+
+
+vec <- c(1,2,3,4,5)
+for (val in vec){
+  print (val)
+}
+vec <- (1:7)
+for (val in vec){
+  print (val)
+}
+i = 0
+while (i < 9){
+  print (i)
+  i = (i+1)
+}
+
+
